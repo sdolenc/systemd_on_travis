@@ -11,3 +11,4 @@ docker exec -i stepdo0 /bin/bash -s <<EOF
 set -ex
 
 systemctl > /dev/null && echo "success!"
+false
