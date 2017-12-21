@@ -10,5 +10,8 @@ docker exec -i stepdo0 /bin/bash -s <<EOF
 # Rely on command's return result
 set -ex
 
-systemctl > /dev/null && echo "success!"
-false
+# test systemd
+systemctl > /dev/null && echo "success: has systemd"
+
+# test networking
+apt-get clean; apt-get -d --reinstall install apt | grep "Download complete" && echo "success: has networking"
