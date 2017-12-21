@@ -13,6 +13,6 @@ before_install:
  - docker run --rm --privileged -v /:/host solita/ubuntu-systemd setup
  - docker run -d --name stepdo0 --security-opt seccomp=unconfined --tmpfs /run --tmpfs /run/lock -v /sys/fs/cgroup:/sys/fs/cgroup:ro -t solita/ubuntu-systemd:16.04
  - docker ps -a
-script: ./test.sh
+script: bash ./test.sh
 
 #todo: test for internet

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Licensed under the MIT license. See LICENSE file on the project webpage for details.
 
 # Determine the appropriate github branch to clone using Travis environment variables
