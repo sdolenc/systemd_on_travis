@@ -14,4 +14,5 @@ set -ex
 systemctl > /dev/null && echo "success: has systemd"
 
 # test networking
-apt-get clean; apt-get -d --reinstall install apt | grep "Download complete" && echo "success: has networking"
+#todo:
+# apt-get clean; apt-get -d --reinstall install apt | grep "Download complete" && echo "success: has networking"
