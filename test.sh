@@ -3,9 +3,9 @@
 
 # Determine the appropriate github branch to clone using Travis environment variables
 BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
-echo "BRANCH=$BRANCH"
 REPO=$TRAVIS_REPO_SLUG
 FOLDER=$(basename $REPO)
+echo "BRANCH=$BRANCH, REPO=$REPO, FOLDER=$FOLDER"
 
 # Connect to container
 docker exec -i stepdo0 /bin/bash -s <<EOF
@@ -28,7 +28,7 @@ else
 fi
 
 # install git
-if sudo apt install -y git ; then
+if apt install -y git ; then
     echo "success: apt install git"
 else
     echo "FAILURE: can't apt install git'"
