@@ -5,14 +5,28 @@
 BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
 echo "BRANCH=$BRANCH"
 
+# Connect to container
 docker exec -i stepdo0 /bin/bash -s <<EOF
 
-# Rely on command's return result
-set -ex
+echo
 
 # test systemd
-systemctl > /dev/null && echo "success: has systemd"
+if systemctl > /dev/null ; then
+    echo "success: has systemd"d
+else
+    echo "FAILURE: no systemd"
+    exit 1
+fi
+
+echo
 
 # test networking
-#todo:
-# apt-get clean; apt-get -d --reinstall install apt | grep "Download complete" && echo "success: has networking"
+apt update
+if apt-get clean; apt-get -d --reinstall install apt | grep "Download complete" ; then
+    echo "success: has networking"
+else
+    echo "FAILURE: no networking"
+    exit 1
+fi
+
+EOF

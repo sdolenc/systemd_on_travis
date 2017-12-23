@@ -1,4 +1,6 @@
 # ubuntu-systemd on travis
-a tiny repo that demonstrates how to use a "solita/ubuntu-systemd" container on travis
+A tiny repo that demonstrates how to use a "solita/ubuntu-systemd" container on travis
 
-todo: repair internet connection and re-enable network test
+Feel free to borrow concepts, fork, open issues, and contribute as you see fit.
+
+todo: clone repo inside container and add/execute a "your-tests-go-here.sh" file.
