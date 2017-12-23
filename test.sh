@@ -48,6 +48,7 @@ if pushd $FOLDER && bash your-tests-go-here.sh ; then
     echo "success: your-tests-go-here.sh passed"
 else
     echo "FAILURE: your-tests-go-here.sh failed"
+    exit 1
 fi
 
 EOF
