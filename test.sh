@@ -4,11 +4,11 @@
 # Determine the appropriate github branch to clone using Travis environment variables
 BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
 echo "BRANCH=$BRANCH"
+REPO=$TRAVIS_REPO_SLUG
+FOLDER=$(basename $REPO)
 
 # Connect to container
 docker exec -i stepdo0 /bin/bash -s <<EOF
-
-echo
 
 # test systemd
 if systemctl > /dev/null ; then
@@ -18,8 +18,6 @@ else
     exit 1
 fi
 
-echo
-
 # test networking
 apt update
 if apt-get clean; apt-get -d --reinstall install apt | grep "Download complete" ; then
@@ -27,6 +25,29 @@ if apt-get clean; apt-get -d --reinstall install apt | grep "Download complete" 
 else
     echo "FAILURE: no networking"
     exit 1
+fi
+
+# install git
+if sudo apt install -y git ; then
+    echo "success: apt install git"
+else
+    echo "FAILURE: can't apt install git'"
+    exit 1
+fi
+
+# clone repo
+if pushd /var/tmp && git clone --depth=50 --branch=$BRANCH https://github.com/${REPO} ; then
+    echo "success: apt install git"
+else
+    echo "FAILURE: can't apt install git'"
+    exit 1
+fi
+
+# run custom tests
+if pushd $FOLDER && bash your-tests-go-here.sh ; then
+    echo "success: your-tests-go-here.sh passed"
+else
+    echo "FAILRE: your-tests-go-here.sh failed"
 fi
 
 EOF
