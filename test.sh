@@ -5,8 +5,6 @@
 BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
 echo "BRANCH=$BRANCH"
 
-env
-
 # Connect to container
 docker exec -i stepdo0 /bin/bash -s <<EOF
 
@@ -30,7 +28,5 @@ else
     echo "FAILURE: no networking"
     exit 1
 fi
-
-env
 
 EOF
