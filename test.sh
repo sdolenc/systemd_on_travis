@@ -31,15 +31,15 @@ fi
 if apt install -y git ; then
     echo "success: apt install git"
 else
-    echo "FAILURE: can't apt install git'"
+    echo "FAILURE: can't apt install git"
     exit 1
 fi
 
 # clone repo
 if pushd /var/tmp && git clone --depth=50 --branch=$BRANCH https://github.com/${REPO} ; then
-    echo "success: apt install git"
+    echo "success: clone repo inside of container"
 else
-    echo "FAILURE: can't apt install git'"
+    echo "FAILURE: can't clone repo inside of container"
     exit 1
 fi
 
@@ -47,7 +47,7 @@ fi
 if pushd $FOLDER && bash your-tests-go-here.sh ; then
     echo "success: your-tests-go-here.sh passed"
 else
-    echo "FAILRE: your-tests-go-here.sh failed"
+    echo "FAILURE: your-tests-go-here.sh failed"
 fi
 
 EOF
