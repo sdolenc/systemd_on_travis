@@ -1,4 +1,6 @@
-sudo: required
+sudo: false
+dist: trusty
+
 language: python
 python:
   - "2.7"
@@ -7,11 +9,12 @@ services:
 branches:
   only:
    - master
+   - network3
 
 before_install:
- - docker pull solita/ubuntu-systemd
- - docker run --rm --privileged -v /:/host solita/ubuntu-systemd setup
- - docker run -d --name stepdo0 --security-opt seccomp=unconfined --tmpfs /run --tmpfs /run/lock -v /sys/fs/cgroup:/sys/fs/cgroup:ro -t solita/ubuntu-systemd:16.04
+ - docker pull solita/ubuntu-systemd:16.04
+ - docker run --rm --privileged -v /:/host solita/ubuntu-systemd:16.04 setup
+ - docker run -d --name stepdo0 security-opt seccomp=unconfined --tmpfs /run --tmpfs /run/lock -v /sys/fs/cgroup:/sys/fs/cgroup:ro -t solita/ubuntu-systemd:16.04
  - docker ps -a
  # Prepare cgroup on the host at /tmp/cgroup to avoid error: "failed to connect to bus: no such file or directory"
  - sudo mkdir -p /tmp/cgroup/systemd && sudo mount -t cgroup systemd /tmp/cgroup/systemd -o ro,noexec,nosuid,nodev,none,name=systemd
