@@ -9,7 +9,6 @@ services:
 branches:
   only:
    - master
-   - customTestsInContainer
 
 before_install:
  - docker pull solita/ubuntu-systemd:16.04
