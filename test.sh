@@ -12,7 +12,7 @@ docker exec -i stepdo0 /bin/bash -s <<EOF
 
 # test systemd
 if systemctl > /dev/null ; then
-    echo "success: has systemd"d
+    echo "success: has systemd"
 else
     echo "FAILURE: no systemd"
     exit 1
